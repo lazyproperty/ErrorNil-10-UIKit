@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         label.text = "Имя"
         //  label.backgroundColor = .systemGray4
         label.textColor = .myText
-        label.font = .systemFont(ofSize: 15, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.frame.origin = CGPoint(x: coupleView.frame.maxX + 10, y: coupleView.frame.minY + 20)
         label.sizeToFit()
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }()
     
     // Фамилию функцией
-    lazy var surnameLabel = createNameSurnameLable(text: "Фамилия", origin: CGPoint(x: nameLabel.frame.maxX + 5, y: nameLabel.frame.minY))
+    lazy var surnameLabel = createLabel(text: "Фамилия", origin: CGPoint(x: nameLabel.frame.maxX + 5, y: nameLabel.frame.minY), fontSize: 20, fontWeight: .bold)
     
     // Кнопка Редактировать
     lazy var editButton: UIButton = {
@@ -45,19 +45,19 @@ class ViewController: UIViewController {
     }()
     
     // Добавить описание
-    lazy var discriptionLabel = createLabel(text: "Добавить описание", origin: CGPoint(x: coupleView.frame.minX, y: coupleView.frame.maxY + 40))
+    lazy var addDiscriptionLabel = createLabel(text: "Добавить описание", origin: CGPoint(x: coupleView.frame.minX, y: coupleView.frame.maxY + 40), fontSize: 15, fontWeight: .regular)
     
     // TextView для описания
     lazy var discriptionTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .systemGray6
         textView.layer.cornerRadius = 15
-        textView.frame = CGRect(x: discriptionLabel.frame.minX, y: discriptionLabel.frame.maxY + 10, width: viewWidth - 60, height: 120)
+        textView.frame = CGRect(x: addDiscriptionLabel.frame.minX, y: addDiscriptionLabel.frame.maxY + 10, width: viewWidth - 60, height: 120)
         return textView
     }()
     
     // Изменить пароль
-    lazy var changePasswordLabel = createLabel(text: "Изменить пароль", origin: CGPoint(x: discriptionTextView.frame.minX, y: discriptionTextView.frame.maxY + 30))
+    lazy var changePasswordLabel = createLabel(text: "Изменить пароль", origin: CGPoint(x: discriptionTextView.frame.minX, y: discriptionTextView.frame.maxY + 30), fontSize: 15, fontWeight: .regular)
     
     // TextField для старого пароля
     lazy var oldPasswordTextField = createTextField(placeholder: "Старый пароль", origin: CGPoint(x: changePasswordLabel.frame.minX, y: changePasswordLabel.frame.maxY + 10))
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubviews(mountainView, coupleView, nameLabel, surnameLabel, editButton, discriptionLabel, discriptionTextView, changePasswordLabel, oldPasswordTextField, newPasswordTextField, saveButton)
+        view.addSubviews(mountainView, coupleView, nameLabel, surnameLabel, editButton, addDiscriptionLabel, discriptionTextView, changePasswordLabel, oldPasswordTextField, newPasswordTextField, saveButton)
         
         
     }
@@ -104,32 +104,19 @@ class ViewController: UIViewController {
         return imageView
     }
     
-    // функция для создания лейблов Имя и Фамилия
-    func createNameSurnameLable(text: String, origin: CGPoint) -> UILabel {
+    // функция для создания лейблов
+    func createLabel(text: String, origin: CGPoint, fontSize: CGFloat, fontWeight: UIFont.Weight) -> UILabel {
         let label = UILabel()
         label.text = text
         label.textColor = .myText
-        //  label.backgroundColor = .systemFill
-        label.font = .systemFont(ofSize: 15, weight: .bold)
+        label.font = .systemFont(ofSize: fontSize, weight: fontWeight)
         label.textAlignment = .center
         label.sizeToFit()
         label.frame.origin = origin
         
         return label
     }
-    
-    // Лейблы о/н
-    func createLabel(text: String, origin: CGPoint) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.textColor = .myText
-        label.font = .systemFont(ofSize: 15, weight: .regular)
-        label.textAlignment = .center
-        label.sizeToFit()
-        label.frame.origin = origin
-        
-        return label
-    }
+
     
     // Текстфилды для старого и нового паролей
     func createTextField(placeholder: String, origin: CGPoint) -> UITextField {
